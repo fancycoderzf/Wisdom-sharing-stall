@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/apply/apply",
+    "pages/reserve/reserve",
+    "pages/recommend/recommend",
+    "pages/mine/mine",
+    "pages/apply/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [{
+        "pagePath": "pages/apply/apply",
+        "text": "资质申请"
+      }, {
+        "pagePath": "pages/reserve/reserve",
+        "text": "预约选摊"
+      },
+      {
+        "pagePath": "pages/recommend/recommend",
+        "text": "智能选摊"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-steps": "@vant/weapp/steps/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-dialog": "@vant/weapp/dialog/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}
