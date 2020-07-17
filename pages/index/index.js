@@ -24,12 +24,16 @@ Page({
     isDisabled: true,
     checked: false,
     brand: "",
+    //存储用户输入的品牌数据
     type: "",
+    //用户选择的品牌数据
     sex: "",
+    //用户输入的性别
     showType: false,
     typeDirection: "down",
-    columns: ['食品类','服装类','图书类','手工艺品类','农产品类','娱乐消遣类'],
+    columns: ['食品类', '服装类', '图书类', '手工艺品类', '农产品类', '娱乐消遣类'],
     activeNames: ['1'],
+    brandError: ""
   },
   open: function (res) {
     this.setData({
@@ -64,24 +68,29 @@ Page({
   },
   apply: function () {
     var that = this
-    that.setData({
-      brand: that.data.brand
-    })
-    that.setData({
-      active: 2
-    })
-    Dialog.alert({
-      title: '提交申请',
-      message: '您的申请已提交，将于3-5个工作日之内给予回复',
-    }).then(() => {
-      // on close
-      wx.navigateBack({
-        delta: 1
-      })
+    if (that.data.brand == "") {
       that.setData({
-        active: 0
+       // brandError: "品牌名称不能为空"
       })
-    });
+    } else {
+      that.setData({
+        brand: that.data.brand,
+        active: 2
+      })
+      Dialog.alert({
+        title: '提交申请',
+        message: '您的申请已提交，将于3-5个工作日之内给予回复',
+      }).then(() => {
+        // on close
+        wx.navigateBack({
+          delta: 1
+        })
+        that.setData({
+          active: 0
+        })
+      });
+    }
+
   },
   onChange: function (res) {
     var that = this
@@ -100,6 +109,15 @@ Page({
   brand: function (res) {
     console.log(res.detail)
     this.data.brand = res.detail
+    if (res.detail == "" ) {
+      this.setData({
+        brandError: "品牌名称不能为空"
+      })
+    } else if (this.data.brandError != "") {
+      this.setData({
+        brandError: ""
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
