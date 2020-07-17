@@ -1,0 +1,2 @@
+<van-cell title="当前时间" value="{{nowTime}}"  />
+<van-button plain hairline type="primary">开始摆摊</van-button>

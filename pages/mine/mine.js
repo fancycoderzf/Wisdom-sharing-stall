@@ -1,4 +1,4 @@
-// pages/mine/mine.js
+import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 
 Page({
 
@@ -11,7 +11,26 @@ Page({
     check: false,
     checkloading: false,
   },
-
+  scan: function () {
+    wx.scanCode({
+      onlyFromCamera: true,
+      success: function (res) {
+        console.log(res)
+        var url = "/".concat(res.path)
+        if (res.codeVersion == 6 || res.path != "") {
+          wx.navigateTo({
+            url: url,
+            success: function () {
+              console.log("跳转成功")
+            },
+            fail: function () {
+              Notify({ type: 'warning', message: '页面跳转失败，请重试' });
+            }
+          })
+        }
+      }
+    })
+  },
   bindGetUser() {
     var that = this
     wx.getSetting({
@@ -61,7 +80,7 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           wx.login({
             success: function (res) {
-              console.log("成功登录")
+              //console.log("成功登录")
             },
             fail: function () {
               console.log("登录失败")

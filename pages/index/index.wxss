@@ -13,3 +13,7 @@
   margin-left: 15px;
   margin-bottom: 20px;
 }
+
+ .radio{
+  margin-left: 20rpx;
+}

@@ -1,11 +1,16 @@
 <view wx:if="{{!check}}">
-	<van-button slot="button" type="primary" block open-type="getUserInfo" bind:getuserinfo="bindGetUser">点击获得头像昵称</van-button>
+	<van-button slot="button" type="primary" block open-type="getUserInfo" bind:getuserinfo="bindGetUser">点击获得头像昵称
+	</van-button>
 </view>
 <view wx:else>
 	<van-cell-group>
 		<van-cell title="我的头像" size="large" center>
 			<van-image width="60px" height="60px" fit="cover" round src="{{imgUrl}}" />
 		</van-cell>
-		<van-cell title="我的昵称" size="large" center value="{{name}}" />
+		<van-cell title="我的昵称" center value="{{name}}" />
+		<van-cell title="扫码摆摊" bind:click="scan">
+			<van-icon slot="right-icon" name="scan" class="custom-icon" />
+		</van-cell>
+		<van-notify id="van-notify" />
 	</van-cell-group>
 </view>

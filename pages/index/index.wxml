@@ -9,33 +9,52 @@
 	<view class="nextPage">
 		<van-button plain hairline type="primary" disabled='{{isDisabled}}' bind:click="change">下一页</van-button>
 	</view>
+	<van-dialog show="{{submitShow}}" title="您已经提交过申请" message="您已经提交过申请，不能重复提交" confirmButtonText="返回主页"
+		bind:close="submitShow" />
 </block>
 
 <block wx:if="{{active == 1}}">
-	<text class="show_input">输入信息</text>
-	<van-cell-group>
-		<van-field value="{{ brand }}" placeholder="（20字以内）" maxlength="20" label="品牌名称" border="{{ false }}" border
-			bind:change="brand"  error-message="{{brandError}}"/>
-		<van-cell title="服务类型" is-link arrow-direction="{{typeDirection}}" bind:click="showType" value="{{type}}" />
-		<van-collapse value="{{ activeNames }}" bind:change="open">
-			<van-collapse-item title="负责人信息" border>
-				<van-cell-group>
-					<van-field value="{{ name }}" required clearable label="姓名" placeholder="请输入姓名" />
-					<!-- 性别先放在这里，准备用图标 -->
-					<van-cell title="性别" value="{{sex}}" required>
-					</van-cell>
-					<van-field value="{{ password }}" maxlength="18" type="idcard" label="身份证号" placeholder="请输入身份证号" required />
-					<van-field value="{{ tel }}" required type="number" maxlength="11" clearable label="联系方式" placeholder="请输入联系方式" />
-				</van-cell-group>
-			</van-collapse-item>
-		</van-collapse>
-	</van-cell-group>
-	<van-action-sheet show="{{ showType }}" title="选择服务类型" bind:close="closeType" bind:click-overlay="closeType">
-		<van-picker columns="{{ columns }}" show-toolbar bind:cancel="closeType" bind:confirm="selectType" />
-	</van-action-sheet>
+	<view class="show_input">
+		<text>输入信息</text>
+	</view>
+	<view>
+		<van-cell-group>
+			<van-field value="{{ brand }}" placeholder="（20字以内）" maxlength="20" label="品牌名称" border="{{ false }}" border
+				required bind:change="brand" error-message="{{BrandError}}" />
+			<van-cell title="服务类型" is-link arrow-direction="down" bind:click="showType" value="{{type}}" required />
+			<van-collapse value="{{ activeNames }}" bind:change="open">
+				<van-collapse-item title="负责人信息" border>
+					<van-cell-group>
+						<van-field value="{{ name }}" required clearable label="姓名" placeholder="请输入姓名" bind:change="name"
+							error-message="{{NameError}}" />
+						<!-- 性别先放在这里，准备用图标 -->
+						<van-cell title="性别" value="{{sex}}" required>
+							<radio-group bindchange="sexSelect">
+								<label class="radio">
+									男
+									<radio value="{{sexSelect1}}" checked="" />
+								</label>
+								<label class="radio">
+									女
+									<radio value="{{sexSelect2}}" checked="" />
+								</label>
+							</radio-group>
+						</van-cell>
+						<van-field value="{{ idcard }}" maxlength="18" type="idcard" label="身份证号" placeholder="请输入身份证号" required
+							clearable bind:change="ID" error-message="{{IDError}}" />
+						<van-field value="{{ tel }}" required type="number" maxlength="11" clearable label="联系方式" bind:change="TEL"
+							error-message="{{TELError}}" placeholder="请输入联系方式" />
+					</van-cell-group>
+				</van-collapse-item>
+			</van-collapse>
+		</van-cell-group>
+		<van-action-sheet show="{{ showType }}" title="选择服务类型" bind:close="closeType" bind:click-overlay="closeType">
+			<van-picker columns="{{ columns }}" show-toolbar bind:cancel="closeType" bind:confirm="selectType" />
+		</van-action-sheet>
+	</view>
 	<van-button plain hairline type="primary" bind:click="apply">提交申请</van-button>
 </block>
 
 <block wx:if="{{active == 2}}">
-	<van-dialog id="van-dialog" />
+	<van-dialog id="van-dialog" confirmButtonText="返回主页" />
 </block>

@@ -18,7 +18,7 @@
 		"scopeDataCheck": false,
 		"uglifyFileName": false,
 		"checkInvalidKey": true,
-		"checkSiteMap": true,
+		"checkSiteMap": false,
 		"uploadWithSourceMap": true,
 		"compileHotReLoad": false,
 		"babelSetting": {
@@ -43,6 +43,7 @@
 	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"cloudfunctionRoot": "cloudfunctions/",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -78,6 +79,13 @@
 					"id": -1,
 					"name": "我的",
 					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/stall/stall",
+					"pathName": "pages/stall/stall",
 					"query": "",
 					"scene": null
 				}
