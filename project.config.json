@@ -68,9 +68,17 @@
 			"current": -1,
 			"list": [
 				{
+					"id": 0,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
 					"id": -1,
-					"name": "资质申请",
-					"pathName": "pages/apply/index/index",
+					"name": "我的",
+					"pathName": "pages/mine/mine",
+					"query": "",
 					"scene": null
 				}
 			]

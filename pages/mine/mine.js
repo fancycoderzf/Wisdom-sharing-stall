@@ -1,13 +1,42 @@
 // pages/mine/mine.js
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    imgUrl: "",
+    name: "123",
+    check: false,
+    checkloading: false,
   },
 
+  bindGetUser() {
+    var that = this
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: function (res) {
+              that.setData({
+                checkloading: true,
+                check: true,
+                name: res.userInfo.nickName,
+                imgUrl: res.userInfo.avatarUrl
+              })
+            },
+            fail: function () {
+              console.log("获取用户信息失败")
+            }
+          })
+        }
+      },
+      fail: function () {
+        console.log("获取用户授权失败")
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -26,7 +55,33 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.login({
+            success: function (res) {
+              console.log("成功登录")
+            },
+            fail: function () {
+              console.log("登录失败")
+            }
+          })
+          wx.getUserInfo({
+            success: function (res) {
+              that.setData({
+                check: true,
+                name: res.userInfo.nickName,
+                imgUrl: res.userInfo.avatarUrl
+              })
+            },
+            fail: function () {
+              console.log("获取用户信息失败")
+            }
+          })
+        }
+      }
+    })
   },
 
   /**

@@ -1,0 +1,41 @@
+<van-steps steps="{{ steps }}" active="{{ active }}" />
+
+<block wx:if="{{ active == 0}}">
+	<!-- 政策文件 -->
+	<view class="checkbox">
+		<van-checkbox value="{{checked}}" shape="square" checked-color="#07c160" bind:change="onChange">我已阅读以上条款
+		</van-checkbox>
+	</view>
+	<view class="nextPage">
+		<van-button plain hairline type="primary" disabled='{{isDisabled}}' bind:click="change">下一页</van-button>
+	</view>
+</block>
+
+<block wx:if="{{active == 1}}">
+	<text class="show_input">输入信息</text>
+	<van-cell-group>
+		<van-field value="{{ brand }}" placeholder="（20字以内）" maxlength="20" label="品牌名称" border="{{ false }}" border
+			bind:change="brand" />
+		<van-cell title="服务类型" is-link arrow-direction="{{typeDirection}}" bind:click="showType" value="{{type}}" />
+		<van-collapse value="{{ activeNames }}" bind:change="open">
+			<van-collapse-item title="负责人信息" border>
+				<van-cell-group>
+					<van-field value="{{ name }}" required clearable label="姓名" placeholder="请输入姓名" />
+					<!-- 性别先放在这里，准备用图标 -->
+					<van-cell title="性别" value="{{sex}}" required>
+					</van-cell>
+					<van-field value="{{ password }}" type="idcard" label="身份证号" placeholder="请输入身份证号" required />
+					<van-field value="{{ tel }}" required type="number"clearable label="联系方式" placeholder="请输入联系方式" />
+				</van-cell-group>
+			</van-collapse-item>
+		</van-collapse>
+	</van-cell-group>
+	<van-action-sheet show="{{ showType }}" title="选择服务类型" bind:close="closeType" bind:click-overlay="closeType">
+		<van-picker columns="{{ columns }}" show-toolbar bind:cancel="closeType" bind:confirm="selectType" />
+	</van-action-sheet>
+	<van-button plain hairline type="primary" bind:click="apply">提交申请</van-button>
+</block>
+
+<block wx:if="{{active == 2}}">
+	<van-dialog id="van-dialog" />
+</block>

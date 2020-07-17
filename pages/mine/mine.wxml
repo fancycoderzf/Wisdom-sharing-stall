@@ -1,2 +1,11 @@
-<!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<view wx:if="{{!check}}">
+	<van-button slot="button" type="primary" block open-type="getUserInfo" bind:getuserinfo="bindGetUser">点击获得头像昵称</van-button>
+</view>
+<view wx:else>
+	<van-cell-group>
+		<van-cell title="我的头像" size="large" center>
+			<van-image width="60px" height="60px" fit="cover" round src="{{imgUrl}}" />
+		</van-cell>
+		<van-cell title="我的昵称" size="large" center value="{{name}}" />
+	</van-cell-group>
+</view>
