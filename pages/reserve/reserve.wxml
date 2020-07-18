@@ -1,2 +1,1 @@
-<!--pages/reserve/reserve.wxml-->
-<text>pages/reserve/reserve.wxml</text>
+<van-cell title="你的位置暴露了：" value="{{photoStreet}}" icon="location-o" />
