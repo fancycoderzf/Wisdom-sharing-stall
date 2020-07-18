@@ -1,6 +1,6 @@
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
 const db = wx.cloud.database()
-
+//对云数据库的链接
 Page({
   /**
    * 页面的初始数据
