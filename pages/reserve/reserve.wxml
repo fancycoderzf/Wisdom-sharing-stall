@@ -1,1 +1,11 @@
-<van-cell title="你的位置暴露了：" value="{{address}}" icon="location-o" bind:click="postAddress" />
+<view class="map">
+  <map style="width: 100%; height: 600px;" longitude="{{photoLongitude}}" latitude="{{photoLatitude}}" scale="{{scale}}"
+    show-location="true" enable-3D show-compass show-scale enable-traffic>
+    <cover-image src="https://3gimg.qq.com/lightmap/xcx/demoCenter/images/btn_plus@3x.png"
+      class="control-btn control-btn-increase" bindtap="onIncreaseScale"></cover-image>
+    <cover-image src="https://3gimg.qq.com/lightmap/xcx/demoCenter/images/btn_minus@3x.png"
+      class="control-btn control-btn-decrease" bindtap="onDecreaseScale"></cover-image>
+    <cover-image src="/pages/reserve/main_bt_position@2x.png"
+      class="focus-btn focus-btn-decrease" bindtap="onFocus"></cover-image>
+  </map>
+</view>
