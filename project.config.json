@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
@@ -87,6 +87,12 @@
 					"name": "pages/stall/stall",
 					"pathName": "pages/stall/stall",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "预约摆摊",
+					"pathName": "pages/reserve/reserve",
 					"scene": null
 				}
 			]

@@ -1,6 +1,5 @@
+var QQMapWX = require('./libs/qqmap-wx-jssdk');
 App({
-
-
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
@@ -14,6 +13,10 @@ App({
       })
     }
   },
+
+  qqmapsdk: new QQMapWX({
+    key: 'YO6BZ-PIELU-BC4V6-2XZU5-5S4I5-QXB6R'
+  }),
 
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow

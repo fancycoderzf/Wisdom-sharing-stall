@@ -5,7 +5,7 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-
+  //返回的是当前时间距离1971年1月1日0时的时间差（毫秒为单位）
   var n = Date.now() + 8 * 3600000;
   var date = new Date(n);
   var Y = date.getFullYear() + ' -';
