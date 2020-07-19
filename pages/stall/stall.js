@@ -9,19 +9,23 @@ Page({
     day: "01 -01",
     h: "00",
     m: "00",
-    s: "00"
-
+    s: "00",
+    sign:""
   },
   //插入1
   setInterval: function () {
     var that = this
     var s = that.data.s
     var m = that.data.m
-    var h = that.data.h
+    var h = that.data.h0
     s++
     console.log("现在的时间球球了" + s + ":" + h + ":" + m)
     setInterval(function () { // 设置定时器
       s++
+      if(s%2==0)
+        sign:":"
+      else if(s%2!=0)
+        sign:" "
       if (s >= 60) {
         s = 0 //  大于等于60秒归零
         m++
