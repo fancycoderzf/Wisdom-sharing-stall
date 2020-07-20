@@ -18,7 +18,7 @@ Page({
     var m = that.data.m
     var h = that.data.h0
     s++
-    console.log("现在的时间球球了" + s + ":" + h + ":" + m)
+    //console.log("现在的时间球球了" + s + ":" + h + ":" + m)
     setInterval(function () { // 设置定时器
       s++
       if (s >= 60) {

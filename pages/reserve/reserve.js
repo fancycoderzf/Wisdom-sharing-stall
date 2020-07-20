@@ -9,7 +9,36 @@ Page({
   data: {
     photoLatitude: "",
     photoLongitude: "",
-    address: ""
+    latitude: "",
+    longitude: "",
+    scale: 15,
+  },
+  onFocus: function () {
+    this.setData({
+      photoLatitude: this.data.latitude,
+      photoLongitude: this.data.longitude
+    })
+  },
+  // 控制地图缩放级别
+  onIncreaseScale() {
+    let scale = this.data.scale;
+    if (scale === 20) {
+      return;
+    }
+    scale++;
+    this.setData({
+      scale: scale
+    });
+  },
+  onDecreaseScale() {
+    let scale = this.data.scale;
+    if (scale === 3) {
+      return;
+    }
+    scale--;
+    this.setData({
+      scale: scale
+    });
   },
   postAddress: function () {
     var that = this
@@ -33,59 +62,17 @@ Page({
   getAddress: function () {
     var that = this
     wx.getLocation({
+      //获得当前用户的经纬度信息
       //小程序要求数据格式
       type: 'gcj02',
+      isHighAccuracy: true,
+      highAccuracyExpireTime: 4000,
       success: function (res) {
-        //console.log(res)
-        var latitude = res.latitude
-        var longitude = res.longitude
-        app.qqmapsdk.reverseGeocoder({
-          //输入坐标，返回对应文字信息
-          location: {
-            latitude: latitude,
-            longitude: longitude
-          },
-          success: function (res) {
-            //console.log(res)
-            if (res.message == 'query ok') {
-              var address = res.result.address
-              that.setData({
-                photoLatitude: latitude,
-                photoLongitude: longitude,
-                address: address,
-              })
-              db.collection('backdoor').where({
-                  _openid: wx.getStorageSync('openid')
-                })
-                .get({
-                  success: function (res) {
-                    console.log(res.data)
-                    if (res.data.length == 0) {
-                      db.collection('backdoor').add({
-                        data: {
-                          address: that.data.address,
-                          createTime: db.serverDate(),
-                          updateTime: db.serverDate()
-                        },
-                      })
-                    } else if (res.data[0].address != that.data.address) {
-                      //console.log("更新地址")
-                      db.collection('backdoor').where({
-                        _openid: wx.getStorageSync('openid')
-                      }).update({
-                        data: {
-                          address: that.data.address,
-                          updateTime: db.serverDate()
-                        },
-                      })
-                    }
-                  }
-                })
-            }
-          },
-          fail: function (res) {
-            console.log("我没了，为啥呀？" + res)
-          },
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude,
+          photoLatitude: res.latitude,
+          photoLongitude: res.longitude
         })
       }
     })
@@ -112,6 +99,7 @@ Page({
       });
     }
     this.getAddress()
+    this.onFocus()
   },
 
   /**
