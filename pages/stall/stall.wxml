@@ -1,3 +1,8 @@
+<block wx:if="{{s % 2 == 0}}">
 <van-cell title="当前时间" value="{{day}} {{h}}:{{m}}:{{s}}"  />
+</block>
+<block wx:else>
+<van-cell title="当前时间" value="{{day}} {{h}} {{m}} {{s}}"  />
+</block>
 <van-button plain hairline type="primary">开始摆摊</van-button>
 

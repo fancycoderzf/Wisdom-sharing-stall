@@ -10,7 +10,6 @@ Page({
     h: "00",
     m: "00",
     s: "00",
-    sign:""
   },
   //插入1
   setInterval: function () {
@@ -22,10 +21,6 @@ Page({
     console.log("现在的时间球球了" + s + ":" + h + ":" + m)
     setInterval(function () { // 设置定时器
       s++
-      if(s%2==0)
-        sign:":"
-      else if(s%2!=0)
-        sign:" "
       if (s >= 60) {
         s = 0 //  大于等于60秒归零
         m++
