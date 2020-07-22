@@ -56,7 +56,8 @@
     "van-notify": "@vant/weapp/notify/index",
     "van-icon": "@vant/weapp/icon/index",
     "van-tabbar": "@vant/weapp/tabbar/index",
-    "van-tabbar-item": "@vant/weapp/tabbar-item/index"
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-search": "@vant/weapp/search/index"
   },
   "sitemapLocation": "sitemap.json"
 }

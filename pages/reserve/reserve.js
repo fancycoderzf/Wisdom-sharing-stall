@@ -12,6 +12,14 @@ Page({
     latitude: "",
     longitude: "",
     scale: 15,
+    address: "",
+  },
+  onChangeSearch: function (res) {
+    console.log(res)
+    //this.data.address = res
+  },
+  onSearchAddress: function () {
+    
   },
   onFocus: function () {
     this.setData({
