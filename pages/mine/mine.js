@@ -10,6 +10,7 @@ Page({
     name: "123",
     check: false,
     checkloading: false,
+    message:"扫码摆摊",
   },
   scan: function () {
     wx.scanCode({
@@ -106,6 +107,24 @@ Page({
         active: 3
       });
     }
+    wx.getStorage({
+      key: 'key1',
+      success(res){
+        console.log("mine读取",res.data)
+        var con=res.data
+        if(con)
+        {
+          that.setData({
+            message:"扫码结束摆摊"
+          })
+        }
+        else{
+          that.setData({
+            message:"扫码摆摊"
+          })
+        }
+      }
+    })
   },
 
   /**
