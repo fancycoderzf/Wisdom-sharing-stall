@@ -8,7 +8,7 @@
 			<van-image width="60px" height="60px" fit="cover" round src="{{imgUrl}}" />
 		</van-cell>
 		<van-cell title="我的昵称" center value="{{name}}" />
-		<van-cell title="扫码摆摊" bind:click="scan">
+		<van-cell title="{{message}}" bind:click="scan">
 			<van-icon slot="right-icon" name="scan" class="custom-icon" />
 		</van-cell>
 		<van-notify id="van-notify" />

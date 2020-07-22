@@ -10,6 +10,8 @@ Page({
     h: "00",
     m: "00",
     s: "00",
+    Con:true,
+    message:"开始摆摊"
   },
   //插入1
   setInterval: function () {
@@ -83,7 +85,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  removeS:function(){
+    wx.removeStorage({
+      key: 'key1'
+  })
+},
   onLoad: function (options) {
+    wx.setStorage({
+      data: true,
+      key: 'key1',
+    })
 
   },
   /**
@@ -96,6 +107,48 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+  ChangeCon:function(){
+    var that=this
+   wx.getStorage({
+     key: 'key1',
+     success(res){
+       console.log(res.data)
+       var con=res.data
+       if(con){
+         that.setData({
+           message:"开始摆摊"
+         })
+       }
+       else{
+         that.setData({
+           message:"结束摆摊"
+         })
+       }
+       wx.setStorage({
+         data: !con,
+         key: 'key1',
+         success(res){
+           console.log("存储数据",!con)
+         }
+       })
+     },
+     //如果本地没有key1标签
+     fail(){
+      that.setData({
+        Con:false,
+        message:"结束摆摊"
+      })
+      wx.setStorage({
+        data: that.data.Con,
+        key: 'key1',
+      })
+     }
+   })
+   wx.switchTab({
+     url: '/pages/mine/mine',
+   })
+  },
+
   onShow: function () {
     //获得当前的服务器时间
     this.getTime()
@@ -103,7 +156,9 @@ Page({
     setTimeout(() => {
       this.setInterval()
     }, 1000)
-    //this.setInterval()
+    this.setInterval()
+    //根据本地缓存获得当前状态
+    
   },
 
   /**
