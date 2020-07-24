@@ -1,17 +1,17 @@
 <view class="map">
-  <map style="width: 100%; height: 600px;" longitude="{{photoLongitude}}" latitude="{{photoLatitude}}" scale="{{scale}}"
-    show-location="true" enable-3D show-compass show-scale enable-traffic>
-    <cover-image src="https://3gimg.qq.com/lightmap/xcx/demoCenter/images/btn_plus@3x.png"
-      class="control-btn control-btn-increase" bindtap="onIncreaseScale"></cover-image>
-    <cover-image src="https://3gimg.qq.com/lightmap/xcx/demoCenter/images/btn_minus@3x.png"
-      class="control-btn control-btn-decrease" bindtap="onDecreaseScale"></cover-image>
-    <cover-image src="/pages/reserve/main_bt_position@2x.png" class="focus-btn focus-btn-decrease" bindtap="onFocus">
-    </cover-image>
-    <view>
-      <van-search value="{{ value }}" label="地址" placeholder="请输入地址" use-action-slot bind:change="onChangeSearch"
-        bind:search="onSearchAddress">
-        <view slot="action" bind:tap="onSearch">搜索</view>
-      </van-search>
-    </view>
-  </map>
+	<map style="width: 100%; height: 600px;" longitude="{{photoLongitude}}" latitude="{{photoLatitude}}" scale="{{scale}}" show-location="true" enable-3D show-compass show-scale enable-traffic markers="{{markers}}" bindtap="getLocation" bindmarkertap="showDetail">
+		<cover-image src="https://3gimg.qq.com/lightmap/xcx/demoCenter/images/btn_plus@3x.png" class="control-btn control-btn-increase" bindtap="onIncreaseScale"></cover-image>
+		<cover-image src="https://3gimg.qq.com/lightmap/xcx/demoCenter/images/btn_minus@3x.png" class="control-btn control-btn-decrease" bindtap="onDecreaseScale"></cover-image>
+		<cover-image src="/pages/reserve/main_bt_position@2x.png" class="focus-btn focus-btn-decrease" bindtap="onFocus">
+		</cover-image>
+		<view>
+			<van-search value="{{ value }}" label="地址" placeholder="请输入地址" use-action-slot bind:change="onChangeSearch" bind:search="onSearchAddress">
+				<view slot="action" bind:tap="onSearch">搜索</view>
+			</van-search>
+		</view>
+	</map>
 </view>
+
+<van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
+<van-progress inactive pivot-text="橙色" color="#07c160" percentage="25" />
+</van-popup>

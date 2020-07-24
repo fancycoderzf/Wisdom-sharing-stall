@@ -110,7 +110,7 @@ Page({
     wx.getStorage({
       key: 'key1',
       success(res){
-        console.log("mine读取",res.data)
+        //console.log("mine读取",res.data)
         var con=res.data
         if(con)
         {

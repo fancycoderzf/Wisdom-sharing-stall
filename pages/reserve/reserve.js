@@ -9,17 +9,22 @@ Page({
   data: {
     photoLatitude: "",
     photoLongitude: "",
-    latitude: "",
-    longitude: "",
+    latitude: "33.27229",
+    longitude: "113.009854",
     scale: 15,
-    address: "",
+    markers: [],
+    show: false,
+  },
+  getLocation: function (res) {
+    console.log(res.detail.latitude)
+    console.log(res.detail.longitude)
   },
   onChangeSearch: function (res) {
     console.log(res)
     //this.data.address = res
   },
   onSearchAddress: function () {
-    
+
   },
   onFocus: function () {
     this.setData({
@@ -85,10 +90,71 @@ Page({
       }
     })
   },
+  getStallLocation: function () {
+    //获得模拟的摊位规划区数据，添加对应的标记
+    var that = this
+    var markersLatitude = []
+    var markersLongitude = []
+    var id = []
+    var i = 0
+    db.collection('markers').get({
+      success: function (res) {
+        //console.log(res.data.length)
+        for (i; i < res.data.length; i++) {
+          markersLatitude.push(res.data[i].latitude)
+          markersLongitude.push(res.data[i].longitude)
+          id.push(res.data[i]._id)
+        }
+        i = 0
+        if (markersLatitude.length > 0) {
+          var markers = []
+          while (i < markersLatitude.length) {
+            var marker = {
+              id: "",
+              iconPath: 'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/Marker3_Activated@3x.png',
+              latitude: "",
+              longitude: "",
+              width: 30,
+              height: 30
+            }
+            marker.id = id[i]
+            marker.latitude = markersLatitude[i],
+              marker.longitude = markersLongitude[i],
+              markers.push(marker)
+            i++
+          }
+          that.setData({
+            markers: markers
+          })
+        }
+      }
+    })
+  },
+  onClose() {
+    this.setData({
+      show: false
+    });
+  },
+  showDetail: function (res) {
+    var id = res.markerId
+    db.collection('markers').where({
+        _id: id
+      })
+      .get({
+        success: function (res) {
+          this.setData({
+            show: true
+          })
+          
+        }
+      })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) {
+    this.getStallLocation()
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -106,7 +172,7 @@ Page({
         active: 1
       });
     }
-    this.getAddress()
+    //this.getAddress()
     this.onFocus()
   },
 
