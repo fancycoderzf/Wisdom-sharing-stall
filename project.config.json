@@ -93,6 +93,13 @@
 					"id": -1,
 					"name": "预约摆摊",
 					"pathName": "pages/reserve/reserve",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/startReserve/startReserve",
+					"pathName": "pages/startReserve/startReserve",
 					"scene": null
 				}
 			]

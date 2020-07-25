@@ -12,6 +12,7 @@ Page({
     closeTime: "",
     nowNumber: "",
     maxNumber: "",
+    markerId: "",
     photoLatitude: "",
     photoLongitude: "",
     latitude: "33.27229",
@@ -21,10 +22,18 @@ Page({
     show: false,
     placeholder: "请输入地址"
   },
-  startReserve:function()
-  {
+  startReserve: function () {
+    var that = this
     wx.navigateTo({
       url: '/pages/startReserve/startReserve',
+      success: function (res) {
+        res.eventChannel.emit('startReserve', {
+          id: that.data.markerId
+        })
+      },
+      fail: function () {
+        console.log("页面跳转失败")
+      }
     })
   },
   getLocation: function (res) {
@@ -157,9 +166,10 @@ Page({
             closeTime: res.data[0].close_time,
             nowNumber: res.data[0].now_number,
             maxNumber: res.data[0].max_number,
-            placeholder:"",
+            placeholder: "",
             show: true,
           })
+          that.data.markerId = id
         }
       })
   },

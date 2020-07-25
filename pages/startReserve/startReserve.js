@@ -1,13 +1,50 @@
-// pages/startReserve/startReserve.js
+const db = wx.cloud.database()
+var jsonData = require('../../data/json.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    id: "",
+    name: "",
+    startTime: "",
+    closeTime: "",
+    seatTypeList: "",
   },
 
+  getNameAndTime: function () {
+    const eventChannel = this.getOpenerEventChannel();
+    var that = this
+    //从上一个页面拿到数据
+    eventChannel.on('startReserve', function (data) {
+      that.setData({
+        id: data.id
+      })
+    })
+    db.collection('markers').where({
+        _id: that.data.id
+      })
+      .get({
+        success: function (res) {
+          that.setData({
+            name: res.data[0].name,
+            startTime: res.data[0].start_time,
+            closeTime: res.data[0].close_time,
+          })
+        }
+      })
+  },
+
+  getIcon: function () {
+    var that = this
+    var res = jsonData.dataList
+    if (res.errorCode == 0) {
+      that.setData({
+        seatTypeList: res.seatTypeList,
+      })  
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -26,7 +63,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getNameAndTime()
   },
 
   /**

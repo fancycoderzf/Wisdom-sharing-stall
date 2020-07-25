@@ -1,2 +1,13 @@
-<!--pages/startReserve/startReserve.wxml-->
-<text>pages/startReserve/startReserve.wxml</text>
+<view class='info'>
+	<view class='stallName'>{{name}}</view>
+	<view class='stallTime'>{{startTime}} - {{closeTime}}</view>
+</view>
+
+<view class="seatDemos">
+    <block wx:for="{{seatTypeList}}" wx:for-index="index" wx:for-item="seatTypeItem" wx:key="index">
+      <view class="seatDemo" wx:if="{{seatTypeItem.isShow==='1' && seatTypeItem.position==='up'}}">
+        <image class="seatDemoItem" mode="widthFix" src="{{seatTypeItem.icon}}"/>
+        <view class="seatDemoItem"> {{seatTypeItem.name}}</view>
+      </view>
+    </block>
+  </view>
