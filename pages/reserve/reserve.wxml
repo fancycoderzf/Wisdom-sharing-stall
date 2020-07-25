@@ -1,11 +1,25 @@
 <view class="map">
+	<van-overlay show="{{ show }}" bind:click="onClickHide">
+		<view class="wrapper" border="{{false}}">
+			<view class="block">
+				<van-cell-group>
+					<van-cell title="区域名称" value="{{name}}" border />
+					<van-cell title="开始时间" value="{{startTime}}" border />
+					<van-cell title="结束时间" value="{{closeTime}}" border />
+					<van-cell title="预约情况" value="{{nowNumber}}/{{maxNumber}}" border />
+				</van-cell-group>
+				<van-button plain type="primary" class="btn" bind:click="startReserve">开始预约</van-button>
+				<van-button class="btn">取消预约</van-button>
+			</view>
+		</view>
+	</van-overlay>
 	<map style="width: 100%; height: 600px;" longitude="{{photoLongitude}}" latitude="{{photoLatitude}}" scale="{{scale}}" show-location="true" enable-3D show-compass show-scale enable-traffic markers="{{markers}}" bindtap="getLocation" bindmarkertap="showDetail">
 		<cover-image src="https://3gimg.qq.com/lightmap/xcx/demoCenter/images/btn_plus@3x.png" class="control-btn control-btn-increase" bindtap="onIncreaseScale"></cover-image>
 		<cover-image src="https://3gimg.qq.com/lightmap/xcx/demoCenter/images/btn_minus@3x.png" class="control-btn control-btn-decrease" bindtap="onDecreaseScale"></cover-image>
 		<cover-image src="/pages/reserve/main_bt_position@2x.png" class="focus-btn focus-btn-decrease" bindtap="onFocus">
 		</cover-image>
 		<view>
-			<van-search value="{{ value }}" label="地址" placeholder="请输入地址" use-action-slot bind:change="onChangeSearch" bind:search="onSearchAddress">
+			<van-search value="{{ value }}" label="地址" placeholder="{{placeholder}}" use-action-slot bind:change="onChangeSearch" bind:search="onSearchAddress">
 				<view slot="action" bind:tap="onSearch">搜索</view>
 			</van-search>
 		</view>
@@ -13,5 +27,5 @@
 </view>
 
 <van-popup show="{{ show }}" round position="bottom" bind:close="onClose">
-<van-progress inactive pivot-text="橙色" color="#07c160" percentage="25" />
+	<van-progress inactive pivot-text="橙色" color="#07c160" percentage="25" />
 </van-popup>

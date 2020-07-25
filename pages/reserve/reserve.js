@@ -7,6 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    name: "test",
+    startTime: "",
+    closeTime: "",
+    nowNumber: "",
+    maxNumber: "",
     photoLatitude: "",
     photoLongitude: "",
     latitude: "33.27229",
@@ -14,6 +19,13 @@ Page({
     scale: 15,
     markers: [],
     show: false,
+    placeholder: "请输入地址"
+  },
+  startReserve:function()
+  {
+    wx.navigateTo({
+      url: '/pages/startReserve/startReserve',
+    })
   },
   getLocation: function (res) {
     console.log(res.detail.latitude)
@@ -130,24 +142,32 @@ Page({
       }
     })
   },
-  onClose() {
-    this.setData({
-      show: false
-    });
-  },
   showDetail: function (res) {
     var id = res.markerId
+    var that = this
+    console.log("点击了标记物" + id)
     db.collection('markers').where({
         _id: id
       })
       .get({
         success: function (res) {
-          this.setData({
-            show: true
+          that.setData({
+            name: res.data[0].name,
+            startTime: res.data[0].start_time,
+            closeTime: res.data[0].close_time,
+            nowNumber: res.data[0].now_number,
+            maxNumber: res.data[0].max_number,
+            placeholder:"",
+            show: true,
           })
-          
         }
       })
+  },
+  onClickHide: function () {
+    this.setData({
+      show: false,
+      placeholder: "请输入地址"
+    })
   },
   /**
    * 生命周期函数--监听页面加载
