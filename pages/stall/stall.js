@@ -11,7 +11,7 @@ Page({
     m: "00",
     s: "00",
     Con:true,
-    message:"开始摆摊"
+    message:"开始/结束摆摊"
   },
   //插入1
   setInterval: function () {
@@ -91,10 +91,6 @@ Page({
   })
 },
   onLoad: function (options) {
-    wx.setStorage({
-      data: true,
-      key: 'key1',
-    })
 
   },
   /**
@@ -112,31 +108,19 @@ Page({
    wx.getStorage({
      key: 'key1',
      success(res){
-       console.log(res.data)
        var con=res.data
-       if(con){
-         that.setData({
-           message:"开始摆摊"
-         })
-       }
-       else{
-         that.setData({
-           message:"结束摆摊"
-         })
-       }
        wx.setStorage({
          data: !con,
          key: 'key1',
          success(res){
-           console.log("存储数据",!con)
          }
        })
      },
      //如果本地没有key1标签
      fail(){
       that.setData({
-        Con:false,
-        message:"结束摆摊"
+        Con:true,
+        message:"开始/结束摆摊"
       })
       wx.setStorage({
         data: that.data.Con,
@@ -145,8 +129,8 @@ Page({
      }
    })
    wx.switchTab({
-     url: '/pages/mine/mine',
-   })
+      url: '/pages/mine/mine',
+    })
   },
 
   onShow: function () {
