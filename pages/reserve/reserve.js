@@ -132,7 +132,7 @@ Page({
           while (i < markersLatitude.length) {
             var marker = {
               id: "",
-              iconPath: 'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/Marker3_Activated@3x.png',
+              iconPath: '/images/Marker3_Activated@3x.png',
               latitude: "",
               longitude: "",
               width: 30,
@@ -154,7 +154,11 @@ Page({
   showDetail: function (res) {
     var id = res.markerId
     var that = this
-    console.log("点击了标记物" + id)
+    //console.log("点击了标记物" + id)
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+    })
     db.collection('markers').where({
         _id: id
       })
@@ -170,14 +174,26 @@ Page({
             show: true,
           })
           that.data.markerId = id
+          wx.hideToast({
+            success: (res) => {
+              console.log("hide success")
+            },
+            fail: (res) => {
+              console.log("hide fail")
+            }
+          })
         }
       })
   },
   onClickHide: function () {
     this.setData({
       show: false,
-      placeholder: "请输入地址"
     })
+    setTimeout(() => {
+      this.setData({
+        placeholder: "请输入地址"
+      })
+    }, 1000);
   },
   /**
    * 生命周期函数--监听页面加载
