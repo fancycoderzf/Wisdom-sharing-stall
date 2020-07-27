@@ -6,7 +6,8 @@
     "pages/recommend/recommend",
     "pages/mine/mine",
     "pages/index/index",
-    "pages/stall/stall"
+    "pages/stall/stall",
+    "pages/startReserve/startReserve"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -58,7 +59,14 @@
     "van-icon": "@vant/weapp/icon/index",
     "van-tabbar": "@vant/weapp/tabbar/index",
     "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+<<<<<<< HEAD
     "van-card": "@vant/weapp/card/index"
+=======
+    "van-search": "@vant/weapp/search/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-loading": "@vant/weapp/loading/index"
+>>>>>>> eaa2ba4efe9b44bd16a189a95a4ab502e078c45c
   },
   "sitemapLocation": "sitemap.json"
 }

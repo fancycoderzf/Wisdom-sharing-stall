@@ -7,11 +7,45 @@ Page({
    * 页面的初始数据
    */
   data: {
+    name: "test",
+    startTime: "",
+    closeTime: "",
+    nowNumber: "",
+    maxNumber: "",
+    markerId: "",
     photoLatitude: "",
     photoLongitude: "",
-    latitude: "",
-    longitude: "",
+    latitude: "33.27229",
+    longitude: "113.009854",
     scale: 15,
+    markers: [],
+    show: false,
+    placeholder: "请输入地址"
+  },
+  startReserve: function () {
+    var that = this
+    wx.navigateTo({
+      url: '/pages/startReserve/startReserve',
+      success: function (res) {
+        res.eventChannel.emit('startReserve', {
+          id: that.data.markerId
+        })
+      },
+      fail: function () {
+        console.log("页面跳转失败")
+      }
+    })
+  },
+  getLocation: function (res) {
+    console.log(res.detail.latitude)
+    console.log(res.detail.longitude)
+  },
+  onChangeSearch: function (res) {
+    console.log(res)
+    //this.data.address = res
+  },
+  onSearchAddress: function () {
+
   },
   onFocus: function () {
     this.setData({
@@ -77,10 +111,96 @@ Page({
       }
     })
   },
+  getStallLocation: function () {
+    //获得模拟的摊位规划区数据，添加对应的标记
+    var that = this
+    var markersLatitude = []
+    var markersLongitude = []
+    var id = []
+    var i = 0
+    db.collection('markers').get({
+      success: function (res) {
+        //console.log(res.data.length)
+        for (i; i < res.data.length; i++) {
+          markersLatitude.push(res.data[i].latitude)
+          markersLongitude.push(res.data[i].longitude)
+          id.push(res.data[i]._id)
+        }
+        i = 0
+        if (markersLatitude.length > 0) {
+          var markers = []
+          while (i < markersLatitude.length) {
+            var marker = {
+              id: "",
+              iconPath: '/images/Marker3_Activated@3x.png',
+              latitude: "",
+              longitude: "",
+              width: 30,
+              height: 30
+            }
+            marker.id = id[i]
+            marker.latitude = markersLatitude[i],
+              marker.longitude = markersLongitude[i],
+              markers.push(marker)
+            i++
+          }
+          that.setData({
+            markers: markers
+          })
+        }
+      }
+    })
+  },
+  showDetail: function (res) {
+    var id = res.markerId
+    var that = this
+    //console.log("点击了标记物" + id)
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+    })
+    db.collection('markers').where({
+        _id: id
+      })
+      .get({
+        success: function (res) {
+          that.setData({
+            name: res.data[0].name,
+            startTime: res.data[0].start_time,
+            closeTime: res.data[0].close_time,
+            nowNumber: res.data[0].now_number,
+            maxNumber: res.data[0].max_number,
+            placeholder: "",
+            show: true,
+          })
+          that.data.markerId = id
+          wx.hideToast({
+            success: (res) => {
+              console.log("hide success")
+            },
+            fail: (res) => {
+              console.log("hide fail")
+            }
+          })
+        }
+      })
+  },
+  onClickHide: function () {
+    this.setData({
+      show: false,
+    })
+    setTimeout(() => {
+      this.setData({
+        placeholder: "请输入地址"
+      })
+    }, 1000);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) {
+    this.getStallLocation()
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -98,7 +218,7 @@ Page({
         active: 1
       });
     }
-    this.getAddress()
+    //this.getAddress()
     this.onFocus()
   },
 

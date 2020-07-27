@@ -3,6 +3,7 @@ App({
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
+  globalData: {},
   onLaunch: function () {
     if (!wx.cloud) {
       console.error("请使用更高版本的基础库")
@@ -12,6 +13,15 @@ App({
         traceUser: true,
       })
     }
+
+    let that = this
+    wx.getSystemInfo({
+      success: res => {
+        that.globalData.screenHeight = res.screenHeight;
+        that.globalData.screenWidth = res.screenWidth;
+        that.globalData.statusBarHeight = res.statusBarHeight
+      }
+    })
   },
 
   qqmapsdk: new QQMapWX({
