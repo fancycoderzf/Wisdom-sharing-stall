@@ -5,15 +5,15 @@
     <block wx:if="{{ applyed }}">
     <!--插入区-->
      <!--card-->
-     <van-card>
-  <view slot="footer">
-     <van-button size="small" bind:click = 'gotoPage'>查看完整信息</van-button>
-     <van-button size="small">重新申请</van-button>
-  </view>
+<van-card>
   <view slot="tags">
      <van-cell title="品牌" value="{{brand}}" size="small" />
      <van-cell title="商品类型" value="{{type}}" size="small" />
      <van-cell title="负责人姓名" value="{{name}}" size="small" />
+  </view>
+   <view slot="footer">
+     <van-button size="small" bind:click = 'gotoPage'>查看完整信息</van-button>
+     <van-button size="small">重新申请</van-button>
   </view>
 </van-card>
   <!--card-->
