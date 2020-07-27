@@ -33,11 +33,15 @@ Page({
       })
       .get({
         success: function (res) {
+          console.log("数据获取成功")
           that.setData({
             name: res.data[0].name,
             startTime: res.data[0].start_time,
             closeTime: res.data[0].close_time,
           })
+        },
+        fail:function(){
+          console.log("本地数据请求失败")
         }
       })
   },
@@ -76,7 +80,7 @@ Page({
    */
   onShow: function () {
     this.getNameAndTime()
-    
+
     var that = this;
     wx.cloud.callFunction({
       // 云函数名称
@@ -86,22 +90,22 @@ Page({
         id: that.data.id
       },
       success: function (res) {
-        console.log(res)
+        let seatList = that.prosessSeatList(res.result.data);
+        that.setData({
+          seatList: seatList,
+          seatTypeList: that.data.seatTypeList,
+          selectedSeat: [],
+          hidden: "hidden",
+        });
+        //计算X和Y坐标最大值
+        that.prosessMaxSeat(seatList);
+        //按每排生成座位数组对象
+        that.creatSeatMap()
       },
       fail: console.error
     })
 
-    // let seatList = that.prosessSeatList(result);
-    // that.setData({
-    //   seatList: seatList,
-    //   seatTypeList: that.data.seatTypeList,
-    //   selectedSeat: [],
-    //   hidden: "hidden",
-    // });
-    // //计算X和Y坐标最大值
-    // that.prosessMaxSeat(seatList);
-    // //按每排生成座位数组对象
-    // that.creatSeatMap()
+
 
 
   },
@@ -142,7 +146,7 @@ Page({
 
   prosessSeatList: function (response) {
     //修改这个地方
-    let resSeatList = response.seatList
+    let resSeatList = response
     resSeatList.forEach(element => {
       // 获取座位的类型的首字母
       let firstNumber = element.type.substr(0, 1)
