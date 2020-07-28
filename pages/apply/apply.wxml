@@ -3,15 +3,20 @@
 <van-collapse value="{{ activeNames }}" bind:change="showApply">
   <van-collapse-item title="我的申请">
     <block wx:if="{{ applyed }}">
-      <van-cell-group>
-        <van-cell title="品牌" value="{{brand}}" />
-        <van-cell title="服务类型" value="{{type}}" />
-        <van-cell title="负责人姓名" value="{{name}}" />
-        <van-cell title="身份证号" value="{{idcard}}" />
-        <van-cell title="联系方式" value="{{tel}}" />
-        <van-cell title="提交时间" value="{{createTime}}" />
-        <van-cell title="申请状态" value="{{condition}}" />
-      </van-cell-group>
+    <!--插入区-->
+     <!--card-->
+<van-card>
+  <view slot="tags">
+     <van-cell title="品牌" value="{{brand}}" size="small" />
+     <van-cell title="商品类型" value="{{type}}" size="small" />
+     <van-cell title="负责人姓名" value="{{name}}" size="small" />
+  </view>
+   <view slot="footer">
+     <van-button size="small" bind:click = 'gotoPage'>查看完整信息</van-button>
+     <van-button size="small">重新申请</van-button>
+  </view>
+</van-card>
+  <!--card-->
     </block>
   </van-collapse-item>
 </van-collapse>

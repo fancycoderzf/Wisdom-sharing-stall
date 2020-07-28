@@ -152,5 +152,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  gotoPage: function(){ 
+    wx.navigateTo({ url: '/pages/message/message?brand='+this.data.brand+'&type='+this.data.type+'&name='+this.data.name+'&idcard='+this.data.idcard+'&tel='+this.data.tel+'&createTime='+this.data.createTime+'&condition='+this.data.condition})
   }
+  
 })
