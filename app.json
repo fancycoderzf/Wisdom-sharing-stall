@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/apply/apply",
+    "pages/message/message",
     "pages/reserve/reserve",
     "pages/recommend/recommend",
     "pages/mine/mine",
@@ -61,7 +62,8 @@
     "van-search": "@vant/weapp/search/index",
     "van-progress": "@vant/weapp/progress/index",
     "van-overlay": "@vant/weapp/overlay/index",
-    "van-loading": "@vant/weapp/loading/index"
+    "van-loading": "@vant/weapp/loading/index",
+    "van-card": "@vant/weapp/card/index"
   },
   "sitemapLocation": "sitemap.json"
 }

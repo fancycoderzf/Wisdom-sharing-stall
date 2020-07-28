@@ -17,3 +17,35 @@
  .radio{
   margin-left: 20rpx;
 }
+.title {
+  width: 100%;
+  background: #fff;
+  padding-bottom: 30rpx;
+  font-weight: bold;
+  font-size: large;
+}
+ 
+.boldContent {
+  width: 100%;
+  background: #fff;
+  padding-bottom: 10rpx;
+  padding-top: 10rpx;
+  font-weight: bolder;
+  font-size: small;
+}
+ 
+.divLine {
+  background:#e0e3da;
+  width: 100%;
+  height: 1px;
+}
+ 
+.normalContent {
+  text-indent: 20rpx;
+  text-align: left;
+  width: 100%;
+  background: #fff;
+  font-size: small;
+  padding-bottom: 10rpx;
+  padding-top: 10rpx;
+}
