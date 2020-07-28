@@ -3,6 +3,14 @@
 	<view class='stallTime'>{{startTime}} - {{closeTime}}</view>
 </view>
 
+<van-action-sheet show="{{ show }}" title="">
+	<van-cell title="设置开始时间">
+		<van-stepper value="{{ 1 }}" bind:change="onChange" />
+	</van-cell>
+	<van-cell title="设置结束时间">
+		<van-stepper value="{{ 1 }}：00" bind:change="onChange" />
+	</van-cell>
+</van-action-sheet>
 <view class="seatDemos">
 	<block wx:for="{{seatTypeList}}" wx:for-index="index" wx:for-item="seatTypeItem" wx:key="index">
 		<view class="seatDemo" wx:if="{{seatTypeItem.isShow==='1' && seatTypeItem.position==='up'}}">

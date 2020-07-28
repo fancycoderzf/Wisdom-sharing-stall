@@ -16,7 +16,8 @@ Page({
     scaleValue: 1,
     hidden: "hidden",
     maxSelect: 1,
-    timer: null
+    timer: null,
+    show: true
   },
 
   getNameAndTime: function () {
@@ -40,7 +41,7 @@ Page({
             closeTime: res.data[0].close_time,
           })
         },
-        fail:function(){
+        fail: function () {
           console.log("本地数据请求失败")
         }
       })

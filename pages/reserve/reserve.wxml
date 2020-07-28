@@ -4,9 +4,8 @@
 			<view class="block">
 				<van-cell-group>
 					<van-cell title="区域名称" value="{{name}}" border />
-					<van-cell title="开始时间" value="{{startTime}}" border />
-					<van-cell title="结束时间" value="{{closeTime}}" border />
-					<van-cell title="预约情况" value="{{nowNumber}}/{{maxNumber}}" border />
+					<van-cell title="开放时间" value="{{startTime}}  --  {{closeTime}}" border />
+					<van-cell title="摊位数量" value="{{maxNumber}}" border />
 				</van-cell-group>
 				<van-button plain type="primary" class="btn" bind:click="startReserve">开始预约</van-button>
 				<van-button class="btn">取消预约</van-button>
@@ -25,4 +24,3 @@
 		</view>
 	</map>
 </view>
-
