@@ -1,4 +1,4 @@
-// pages/stall/stall.js
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -109,14 +109,38 @@ Page({
 
   //开始摆摊或者摆摊结束时的提示
   ChangeCon: function () {
-    if(this.data.type == 0){
+    var that = this
+    if (that.data.type == 0) {
       wx.setStorageSync('type', "1")
-    }else{
+    } else {
       wx.setStorageSync('type', "0")
     }
     wx.navigateBack({
       delta: 1,
     })
+    if (that.data.type == 0) {
+      db.collection('user')
+        .where({
+          _openid: wx.getStorageSync('openid')
+        })
+        .update({
+          data: {
+            type: that.data.type,
+            startTime: db.serverDate(),
+          }
+        })
+    } else {
+      db.collection('user')
+        .where({
+          _openid: wx.getStorageSync('openid')
+        })
+        .update({
+          data: {
+            type: that.data.type,
+            closeTime: db.serverDate(),
+          }
+        })
+    }
   },
 
   onShow: function () {
