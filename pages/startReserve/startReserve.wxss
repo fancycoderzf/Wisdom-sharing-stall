@@ -1,0 +1,82 @@
+.info {
+  width: 100%;
+  height: 80rpx;
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  padding: 30rpx 30rpx;
+  position: relative;
+}
+
+.stallName {
+  font-size: 35rpx;
+  font-weight: 600;
+  margin-bottom: 10rpx;
+}
+
+.stallTime {
+  color: #aaa;
+  font-size: 27rpx;
+}
+
+.seatDemos {
+  color: #aaa;
+  background: #fff;
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+  box-sizing: border-box;
+  font-size: 25rpx;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.seatDemo image {
+  width: 45rpx;
+  height: 45rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.seatDemoItem {
+  white-space: nowrap;
+  width: 45rpx;
+  display: block;
+}
+
+.movableOne {
+  box-sizing: border-box;
+  padding: 100rpx 60rpx;
+  color: #fff;
+}
+
+.seatArea {
+  margin: 0 auto;
+  font-size: 10rpx;
+  position: relative;
+}
+
+.alignLine {
+  position: absolute;
+  left: 50%;
+  height: 100%;
+  border-left: 1px dashed #aaa;
+  transform: translateX(-100%);
+}
+
+.seatTap {
+  position: absolute;
+}
+
+/*
+*选座区域普通座位的图片样式
+*/
+
+.normal {
+  position: relative;
+  /* margin: 10rpx; */
+  width: 100%;
+  height: 100%;
+}
