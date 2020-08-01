@@ -11,7 +11,8 @@ Page({
     m: "00",
     s: "00",
     Con: true,
-    message: "开始/结束摆摊"
+    type: 0,
+    message: "开始摆摊"
   },
   //插入1
   setInterval: function () {
@@ -85,13 +86,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  removeS: function () {
-    wx.removeStorage({
-      key: 'key1'
-    })
-  },
-  onLoad: function (options) {
 
+  onLoad: function (options) {
+    var that = this
+    if (options.type == 1) {
+      that.setData({
+        type: 1,
+        message: "结束摆摊"
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -106,34 +109,14 @@ Page({
 
   //开始摆摊或者摆摊结束时的提示
   ChangeCon: function () {
-    var that = this
-    wx.getStorageSync({
-      key: 'key1',
-      success(res) {
-        var con = res.data
-        wx.setStorageSync({
-          data: !con,
-          key: 'key1',
-        })
-      },
-      //如果本地没有key1标签
-      fail() {
-        that.setData({
-          Con: true,
-          message: "开始/结束摆摊"
-        })
-        wx.setStorage({
-          data: that.data.Con,
-          key: 'key1',
-        })
-      }
+    if(this.data.type == 0){
+      wx.setStorageSync('type', "1")
+    }else{
+      wx.setStorageSync('type', "0")
+    }
+    wx.navigateBack({
+      delta: 1,
     })
-
-
-    wx.switchTab({
-      url: '/pages/mine/mine',
-    })
-
   },
 
   onShow: function () {

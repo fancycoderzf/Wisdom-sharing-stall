@@ -10,9 +10,11 @@ Page({
     name: "123",
     check: false,
     checkloading: false,
+    type: 0,
     message: "扫码摆摊",
   },
   scan: function () {
+    var that = this
     wx.scanCode({
       onlyFromCamera: true,
       success: function (res) {
@@ -20,7 +22,7 @@ Page({
         var url = "/".concat(res.path)
         if (res.codeVersion == 6 || res.path != "") {
           wx.navigateTo({
-            url: url,
+            url: url + '?type=' + that.data.type,
             success: function () {
               console.log("跳转成功")
             },
@@ -48,6 +50,14 @@ Page({
                 name: res.userInfo.nickName,
                 imgUrl: res.userInfo.avatarUrl
               })
+              db.collection('user')
+                .add({
+                  data: {
+                    name: that.data.name,
+                    imgUrl: that.data.imgUrl,
+                    type: 0
+                  },
+                })
             },
             fail: function () {
               console.log("获取用户信息失败")
@@ -64,9 +74,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.removeStorage({
-      key: 'key1',
-    })
+    var checkType
+    db.collection('user')
+      .where({
+        _openid: wx.getStorageSync('openid')
+      })
+      .get({
+        success(res) {
+          //获取当前用户的摆摊状态
+          //0表示无预约，1表示正在摆摊
+          if (res.data[0].type == 1) {
+            checkType = "1"
+          } else {
+            checkType = "0"
+          }
+          wx.setStorageSync('type', checkType)
+        },
+        fail() {
+          console.log("当前用户没有提交过申请或请求数据失败")
+        }
+      })
   },
 
   /**
@@ -114,17 +141,16 @@ Page({
       });
     }
     wx.getStorage({
-      key: 'key1',
+      key: 'type',
       success(res) {
-        //console.log("mine读取",res.data)
-
-        var con = res.data
-        if (con) {
+        if (res.data == "1") {
           that.setData({
+            type: 1,
             message: "扫码结束摆摊"
           })
-        } else {
+        }else{
           that.setData({
+            type: 0,
             message: "扫码摆摊"
           })
         }
