@@ -1,4 +1,3 @@
-const db = wx.cloud.database()
 var jsonData = require('../../data/json.js');
 Page({
 
@@ -17,35 +16,9 @@ Page({
     hidden: "hidden",
     maxSelect: 1,
     timer: null,
-    show: true
+    show: false
   },
 
-  getNameAndTime: function () {
-    const eventChannel = this.getOpenerEventChannel();
-    var that = this
-    //从上一个页面拿到数据
-    eventChannel.on('startReserve', function (data) {
-      that.setData({
-        id: data.id
-      })
-    })
-    db.collection('markers').where({
-        _id: that.data.id
-      })
-      .get({
-        success: function (res) {
-          console.log("数据获取成功")
-          that.setData({
-            name: res.data[0].name,
-            startTime: res.data[0].start_time,
-            closeTime: res.data[0].close_time,
-          })
-        },
-        fail: function () {
-          console.log("本地数据请求失败")
-        }
-      })
-  },
 
   getIcon: function () {
     var that = this
@@ -67,6 +40,12 @@ Page({
       rpxToPx: getApp().globalData.screenWidth / 750
     });
     this.getIcon()
+    that.setData({
+      id: options.id,
+      name: options.name,
+      startTime: options.startTime,
+      closeTime: options.closeTime,
+    })
   },
 
   /**
@@ -80,8 +59,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getNameAndTime()
-
     var that = this;
     wx.cloud.callFunction({
       // 云函数名称

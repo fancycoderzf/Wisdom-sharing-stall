@@ -63,11 +63,8 @@
     "van-progress": "@vant/weapp/progress/index",
     "van-overlay": "@vant/weapp/overlay/index",
     "van-loading": "@vant/weapp/loading/index",
-<<<<<<< HEAD
-    "van-stepper": "@vant/weapp/stepper/index"
-=======
+    "van-stepper": "@vant/weapp/stepper/index",
     "van-card": "@vant/weapp/card/index"
->>>>>>> 9e982d3221b23f6cde0443a6f3d91bb9d5c3d4f1
   },
   "sitemapLocation": "sitemap.json"
 }

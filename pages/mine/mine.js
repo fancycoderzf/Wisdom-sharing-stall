@@ -1,5 +1,5 @@
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
-
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -10,7 +10,7 @@ Page({
     name: "123",
     check: false,
     checkloading: false,
-    message:"扫码摆摊",
+    message: "扫码摆摊",
   },
   scan: function () {
     wx.scanCode({
@@ -25,7 +25,10 @@ Page({
               console.log("跳转成功")
             },
             fail: function () {
-              Notify({ type: 'warning', message: '页面跳转失败，请重试' });
+              Notify({
+                type: 'warning',
+                message: '页面跳转失败，请重试'
+              });
             }
           })
         }
@@ -77,6 +80,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
     var that = this
     wx.getSetting({
       success(res) {
@@ -111,19 +115,17 @@ Page({
     }
     wx.getStorage({
       key: 'key1',
-      success(res){
+      success(res) {
         //console.log("mine读取",res.data)
 
-        var con=res.data
-        if(con)
-        {
+        var con = res.data
+        if (con) {
           that.setData({
-            message:"扫码结束摆摊"
+            message: "扫码结束摆摊"
           })
-        }
-        else{
+        } else {
           that.setData({
-            message:"扫码摆摊"
+            message: "扫码摆摊"
           })
         }
       }

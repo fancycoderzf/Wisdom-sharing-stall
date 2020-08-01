@@ -13,7 +13,7 @@
   </view>
    <view slot="footer">
      <van-button size="small" bind:click = 'gotoPage'>查看完整信息</van-button>
-     <van-button size="small">重新申请</van-button>
+     <van-button size="small" disabled="{{reapply}}">重新申请</van-button>
   </view>
 </van-card>
   <!--card-->

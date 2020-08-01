@@ -19,21 +19,34 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let that =this;
+        let that = this;
         //查看传递数据 是否成功
-        console.log(options);
-         //更新此页面的data数据
-    that.setData({
-        brand:options.brand,
-        type:options.type,
-        name:options.name,
-        idcard:options.idcard,
-        tel:options.tel,
-        condition:options.condition,
-        createTime:options.createTime
-    })
+        //console.log(options);
+        var condition = ""
+        console.log(options.condition)
+        switch (options.condition) {
+            case "-1":
+                condition = "申请失败"
+                break;
+            case "0":
+                condition = "已提交"
+                break;
+            case "1":
+                condition = "申请成功"
+                break;
+        }
+        //更新此页面的data数据
+        that.setData({
+            brand: options.brand,
+            type: options.type,
+            name: options.name,
+            idcard: options.idcard,
+            tel: options.tel,
+            condition: condition,
+            createTime: options.createTime
+        })
     },
-     
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -44,7 +57,7 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function (options) {
 
     },
 

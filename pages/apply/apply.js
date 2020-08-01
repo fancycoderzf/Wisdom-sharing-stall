@@ -16,7 +16,8 @@ Page({
     idcard: "",
     tel: "",
     condition: "",
-    createTime: ""
+    createTime: "",
+    reapply: true
   },
   showApply: function (res) {
     //console.log(res.detail.length)
@@ -63,6 +64,11 @@ Page({
               applyed: false
             })
           } else {
+            if (res.data[0].condition == "-1") {
+              that.setData({
+                reapply: false
+              })
+            }
             that.setData({
               applyed: true,
               brand: res.data[0].brand,
@@ -74,6 +80,7 @@ Page({
               condition: res.data[0].condition
             })
           }
+
         },
         fail() {
           console.log("当前用户没有提交过申请或请求数据失败")
@@ -153,8 +160,10 @@ Page({
   onShareAppMessage: function () {
 
   },
-  gotoPage: function(){ 
-    wx.navigateTo({ url: '/pages/message/message?brand='+this.data.brand+'&type='+this.data.type+'&name='+this.data.name+'&idcard='+this.data.idcard+'&tel='+this.data.tel+'&createTime='+this.data.createTime+'&condition='+this.data.condition})
+  gotoPage: function () {
+    wx.navigateTo({
+      url: '/pages/message/message?brand=' + this.data.brand + '&type=' + this.data.type + '&name=' + this.data.name + '&idcard=' + this.data.idcard + '&tel=' + this.data.tel + '&createTime=' + this.data.createTime + '&condition=' + this.data.condition
+    })
   }
-  
+
 })

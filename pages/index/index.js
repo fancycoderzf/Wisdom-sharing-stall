@@ -1,5 +1,5 @@
 import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
-const db = wx.cloud.database()
+
 //对云数据库的链接
 Page({
   /**
@@ -113,12 +113,14 @@ Page({
   //阅读完政策文件之后的信息
   change: function () {
     var that = this
+    const db = wx.cloud.init().database()
     db.collection('apply')
       .where({
         _openid: wx.getStorageSync('openid')
       })
       .get({
         success(res) {
+          //todo 此处补充判断用户信息提交状态的逻辑
           if (res.data.length == 0) {
             //console.log("执行了")
             that.setData({
@@ -183,7 +185,7 @@ Page({
             idcard: this.data.idcard,
             tel: this.data.tel
           },
-          condition: "已提交",
+          condition: "0",
           createTime: db.serverDate()
         },
         success: function () {

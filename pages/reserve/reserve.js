@@ -25,12 +25,9 @@ Page({
   startReserve: function () {
     var that = this
     wx.navigateTo({
-      url: '/pages/startReserve/startReserve',
-      success: function (res) {
-        res.eventChannel.emit('startReserve', {
-          id: that.data.markerId
-        })
-      },
+      url: '/pages/startReserve/startReserve?id=' + that.data.markerId + '&name=' + that.data.name + '&startTime=' +
+        that.data.startTime + '&closeTime=' +
+        that.data.closeTime,
       fail: function () {
         console.log("页面跳转失败")
       }
