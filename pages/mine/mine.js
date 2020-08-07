@@ -107,14 +107,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
     var that = this
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.userInfo']) {
           wx.login({
             success: function (res) {
-              //console.log("成功登录")
+              //console.log("成功登录") 
             },
             fail: function () {
               console.log("登录失败")
@@ -148,7 +147,7 @@ Page({
             type: 1,
             message: "扫码结束摆摊"
           })
-        }else{
+        } else {
           that.setData({
             type: 0,
             message: "扫码摆摊"

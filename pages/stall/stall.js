@@ -21,7 +21,6 @@ Page({
     var m = that.data.m
     var h = that.data.h0
     s++
-    //console.log("现在的时间球球了" + s + ":" + h + ":" + m)
     setInterval(function () { // 设置定时器
       s++
       if (s >= 60) {
@@ -69,7 +68,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getTime',
       success: function (res) {
-        console.log(res.result)
+        //console.log(res.result)
         //研究一下在本地进行倒计时的效果
         that.setData({
           day: res.result.day,
@@ -144,14 +143,18 @@ Page({
   },
 
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     //获得当前的服务器时间
     this.getTime()
     //异步操作，1秒之后更新
     setTimeout(() => {
       this.setInterval()
+      wx.hideLoading({
+        success: (res) => {},
+      })
     }, 1000)
-    this.setInterval()
-    //根据本地缓存获得当前状态
 
   },
 
