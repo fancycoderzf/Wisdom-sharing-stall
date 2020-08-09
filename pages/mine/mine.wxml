@@ -11,6 +11,7 @@
 		<van-cell title="{{message}}" bind:click="scan">
 			<van-icon slot="right-icon" name="scan" class="custom-icon" />
 		</van-cell>
+		<van-cell is-link title="我的积分" link-type="navigateTo" url="/pages/myScore/myScore" />
 		<van-notify id="van-notify" />
 	</van-cell-group>
 </view>

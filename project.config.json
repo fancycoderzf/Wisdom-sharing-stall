@@ -101,6 +101,13 @@
 					"id": -1,
 					"name": "pages/startReserve/startReserve",
 					"pathName": "pages/startReserve/startReserve",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的积分",
+					"pathName": "pages/myScore/myScore",
 					"scene": null
 				}
 			]

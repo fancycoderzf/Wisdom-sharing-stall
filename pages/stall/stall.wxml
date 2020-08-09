@@ -6,4 +6,3 @@
 </block>
 <van-button plain hairline type="primary" bind:click="ChangeCon">{{message}} </van-button>
 
-
