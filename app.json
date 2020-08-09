@@ -8,7 +8,8 @@
     "pages/index/index",
     "pages/stall/stall",
     "pages/startReserve/startReserve",
-    "pages/myScore/myScore"
+    "pages/myScore/myScore",
+    "pages/myFirst/myFirst"
   ],
   "window": {
     "backgroundTextStyle": "light",
