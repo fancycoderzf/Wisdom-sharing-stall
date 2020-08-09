@@ -30,6 +30,7 @@ Page({
       })
       .get({
         success: function (res) {
+          // console.log(res.data[0].nowScore)
           var score = res.data[0].nowScore
           that.setData({
             myScore: score,

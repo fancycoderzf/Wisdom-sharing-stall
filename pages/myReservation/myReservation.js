@@ -1,4 +1,4 @@
-// pages/myFirst/myFirst.js
+// pages/myReservation/myReservation.js
 Page({
 
   /**
